@@ -1,5 +1,42 @@
-{% extends "main.html" %} {# Gjør slik at det som er inni content blir lagt til i main.html #}
+{% extends "main.html" %} {# Gjør slik at det elementer inni content blir lagt til i main.html #}
 
 
 {% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-12 mb-5">
+			<h1 class="main-title">	Acaippa FAQ </h1>
+			<p class="slogan">Så hjelpe meg gud om du kontakter helpdesk...</p>
+		</div>
+		<div class="col-12 row mt-5">
+			<div class="col-12 filter-container">
+				<input type="text" name="filter-text" class="text-filter col-4" placeholder="Hva er problemet?">
+
+				<select class="col-2" name="category-filter" class="">
+					<option>Kategorier:</option>
+				</select>
+
+				<select class="col-2" name="category-filter" class="">
+					<option>Under-kategorier:</option>
+				</select>
+
+				<button>Søk</button>
+			</div>
+			<div class="col-12 card-container mt-5">
+				{% for i in "awoidjoiawjdoiawjd" %}
+					<div class="card-margin col-4">
+						<div class="card">
+							<h1 class="card-title col">
+								Tittel på problem
+							</h1>
+							<p class="card-date">Postet: 01.01.2023</p>
+							<p class="card-description">Kort beskrivelse av problemet. Trykk på kortet for å komme til brukerveiledningen.</p>
+							<p class="card-click-info">Trykk for å lese mer ></p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

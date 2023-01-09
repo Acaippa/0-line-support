@@ -1,0 +1,65 @@
+.main-title {
+	font-size: 100px;
+	font-weight: bold;
+}
+
+.slogan {
+	font-weight: bold;
+}
+
+.text-filter {
+	padding: 
+	2px;
+}
+
+.filter-container {
+	display: flex;
+	flex-direction: row;
+}
+
+.filter-container > * {
+	margin: 0 30px 0 0;
+}
+
+.card-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.card {
+	margin: 20px 20px 20px 0;
+	padding: 10px;
+}
+
+.card-click-info {
+	font-style: italic;
+	text-align: right;
+	margin-bottom: 0;
+}
+
+.card-detail-desc {
+	font-weight: bolder;
+}
+
+.card-detail-date {
+	text-align: right;
+	margin-bottom: -10px;
+}
+
+hr {
+	border-width: 2px;
+}
+
+.ticket-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.ticket-form > * {
+	margin: 20px;
+}
+
+.ticket-content {
+	resize: none;
+}

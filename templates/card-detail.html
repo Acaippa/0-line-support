@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="container p-5"> <!-- TODO make container have different background from body -->
+	<h1 class="main-title">Tittel på problem</h1>
+	<p class="card-detail-desc">Kort beskrivelse av problemet. Trykk på kortet for å komme til brukerveiledningen.</p>
+	<p class="card-detail-date">Postet: 01.01.2023</p>
+	<hr>
+	<div class="card-guide-container">
+		<p>Her vil de med adgang ha mulighet til å legge til sine egne brukerveiledninger.</p>
+		<!-- TODO add link to ticket registry at the bottom of the guide. -->
+	</div>
+</div>
+{% endblock %}
