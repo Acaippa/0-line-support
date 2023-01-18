@@ -3,13 +3,14 @@
 {% block content %}
 <div class="container"> <!-- TODO change color -->
 	<div class="ticket-body mt-5 mb-5">
+		<a href="/problem/{{problem_id}}">< Tilbake</a>
 		<h1 class="main-title">Kontakt helpdesk</h1>
 		<p class="slogan">Hjalp ingen av brukerveiledningene? Kontakt helpdesken her så fikser vi problemet.</p>
 		<hr>
 		<form class="ticket-form mt-5">
-			<input type="email" name="ticket-email" class="email-ticket col-12 col-sm-4" placeholder="Email:">
-			<input type="text" name="ticket-topic" class="topic-ticket col-12 col-sm-4" placeholder="Emne:">
-			<textarea class="ticket-content col-12 col-sm-4" rows=5 name="ticket-content" placeholder="Forklar problemet i detalj:"></textarea>
+			<input type="email" name="ticket-email" class="email-ticket col-12 col-sm-6" placeholder="Email:">
+			<input type="text" name="ticket-topic" class="topic-ticket col-12 col-sm-6" placeholder="Emne:">
+			<textarea class="ticket-content col-12 col-sm-6" rows=5 name="ticket-content" placeholder="Forklar problemet i detalj:"></textarea>
 			<button class="ticket-button col-6 col-sm-2">Send Inn</button>
 		</form>
 	</div>

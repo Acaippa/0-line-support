@@ -1,23 +1,24 @@
 {% extends "main.html" %}
 
 {% block content %}
-<div class="container overflow-hidden"> <!-- TODO make container have different background from body -->
-	<h1 class="main-title">Tittel på problem</h1>
-	<p class="card-detail-desc">Kort beskrivelse av problemet. Trykk på kortet for å komme til brukerveiledningen.<p class="card-detail-date">Postet: 01.01.2023</p></p>
+<div class="container pt-3"> <!-- TODO make container have different background from body -->
+	<a href="/">< Tilbake</a>
+	<h1 class="main-title">{{problem.tittel}}</h1>
+	<p class="card-detail-desc">{{problem.beskrivelse}}<p class="card-detail-date">Postet: 01.01.2023</p></p>
 	<div class="card-detail-top">
 		<div class="category-container">
-			<p class="category">
-				Printer
+			<p class="category" style="background-color: #{{problem.kategori.farge}}">
+				{{problem.kategori.navn}}
 			</p>
-			<p class="subcategory">
-				Tilkoblingsproblemer
+			<p class="subcategory" style="background-color: #{{problem.kategori.under_kategori.farge}}">
+				{{problem.kategori.under_kategori.navn}}
 			</p>
 		</div>
 	</div>
 	<hr class="mt-1">
-	<div class="card-guide-container">
-		<p>Her vil de med adgang ha mulighet til å legge til sine egne brukerveiledninger.</p>
-		<!-- TODO add link to ticket registry at the bottom of the guide. -->
+	<div class="card-guide-container d-flex flex-column">
+		{{problem.guide}}
+		<a class="text-center" href="/ticket/{{problem.problem_id}}">Har du fortsatt problemer? Kontakt Helpdesk her</a>
 	</div>
 </div>
 {% endblock %}
