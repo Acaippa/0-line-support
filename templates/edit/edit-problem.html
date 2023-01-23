@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load index %}
+
+{% block content %}
+<!-- Om brukeren ikke er logget inn, så sendes de tilbake til hovedsiden -->
+{% if user.is_authenticated %}
+    <link rel="stylesheet" href="{% static 'edit-problem.css' %}">
+    <div class="container">
+        <h1 class="main-title">
+            Endre problem
+        </h1>
+        <hr>
+        <form method="pos" action="" class="problem-edit-form">
+            {% for name, type in problem_fields.items %}
+                {% if name != " problem_id" %}
+                    {{problem|index:forloop.counter0}}
+                    <input type="{{type}}" placeholder="{{name}}" value="{{problem|index:forloop.counter0}}">
+                {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+{% else %}
+    <script>
+        window.location.href = "/"
+    </script>
+{% endif %}
+{% endblock %}

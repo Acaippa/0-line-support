@@ -3,5 +3,5 @@ from pages import urls
 
 urlpatterns = [
     path('', include(urls)),
-    re_path(r"^accounts/", include("django.contrib.auth.urls")) # Legg dil Django's innebygde registrering for brukere https://realpython.com/django-user-management/
+    re_path(r"^accounts/", include("django.contrib.auth.urls")), # Legg dil Django's innebygde registrering for brukere https://realpython.com/django-user-management/
 ]

@@ -1,5 +1,7 @@
 {% extends "main.html" %} {# Gjør slik at det elementer inni content blir lagt til i main.html #}
 
+{% load static %}
+
 
 {% block content %}
 <div class="container overflow-hidden">
@@ -25,10 +27,17 @@
 			<div class="col-12 card-container mt-5">
 				{% for problem in problems %}
 					<div class="card-margin col-12 col-md-6 col-lg-4">
-						<div class="card" onclick="window.location.href ='problem/{{problem.problem_id}}'">
-							<h1 class="card-title col">
-								{{problem.tittel}}
-							</h1>
+						<div class="card problem-card" onclick="checkClick(this, '{{problem.problem_id}}')">
+							<div class="card-title-edit-container d-flex flex-row">
+								<h1 class="card-title col">
+									{{problem.tittel}}
+								</h1>
+								{% if user.is_authenticated %}
+									<div class="edit-container">
+										<img src="{% static 'icons/pencil-square.svg' %}" alt="Endre ikon" class="edit-icon" onclick="window.location.href = '/editproblem/{{problem.problem_id}}'">
+									</div>
+								{% endif %}
+							</div>
 							<div class="card-top-container overflow-hidden mb-1">
 								<div class="category-container">
 									<p class="category" style="background-color: #{{problem.kategori.farge}};">
@@ -52,4 +61,6 @@
 		</div>
 	</div>
 </div>
+
+<script src="{% static 'scripts/card-click.js' %}"></script>
 {% endblock %}
