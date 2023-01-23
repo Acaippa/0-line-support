@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .account-bar {
+        display: none !important;
+    }
+</style>
+<link rel="stylesheet" href="{% static "login.css" %}">
+
+<div class="container">
+    <a href="/">< Tilbake</a>
+    <h1 class="main-title">Logg Inn</h1>
+    <hr>
+
+    <form method="POST" class="mt-4 login-form col-sm-6 col-12 col-lg-4">
+        {% csrf_token %}
+        {{ form }}
+
+        <input type="submit", value="login" class="mt-3 col-sm-3 col-6">
+    </form>
+</div>
+{% endblock %}

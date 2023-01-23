@@ -9,6 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
+	<div class="container account-bar d-flex justify-content-end">
+		<div class="account-div align-self-right">
+			{% if user.is_anonymous == False %}
+				<p>{{user.first_name}} {{user.last_name}} <a href="/accounts/logout">Logg ut</a></p>
+			{% else %}
+				<a href="/accounts/login">Logg inn</a>
+			{% endif %}
+		</div>
+	</div>
 	{% block content %}
 	{% endblock %}
 </body>
