@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from random import randint
+from website.settings import*
 
 def get_rand():
     return randint(0, 9)

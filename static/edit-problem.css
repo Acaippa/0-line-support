@@ -2,3 +2,11 @@
     display: flex;
     flex-direction: column;
 }
+
+.problem-edit-form > * {
+    margin-bottom: 20px;
+}
+
+.problem-edit-form > label {
+    margin:0;
+}
