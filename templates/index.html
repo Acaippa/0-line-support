@@ -11,52 +11,66 @@
 			<p class="slogan">Så hjelpe meg gud om du kontakter helpdesk...</p>
 		</div>
 		<div class="col-12 row mt-5">
-			<div class="col-12 filter-container">
+			<form method="POST" action="filter" class="col-12 filter-container">
+				{% csrf_token %}
 				<input type="text" name="filter-text" class="text-filter col-4" placeholder="Hva er problemet?">
 
 				<select class="col-2" name="category-filter" class="">
-					<option>Kategorier:</option>
+					<option value="none" selected disabled hidden>Kategorier:</option>
+					{% for category in categories %}
+						<option value="{{category.navn}}">{{category.navn}}</option>
+					{% endfor %}
 				</select>
 
-				<select class="col-2" name="category-filter" class="">
-					<option>Under-kategorier:</option>
+				<select class="col-2" name="subcategory-filter" class="">
+					<option value="none" selected disabled hidden>Under-kategorier:</option>
+					{% for subcategory in subcategories %}
+						<option value="{{subcategory.navn}}">{{subcategory.navn}}</option>
+					{% endfor %}
 				</select>
 
-				<button>Søk</button>
-			</div>
+				<button onclick="this.form.submit()" class="btn btn-primary">Søk</button>
+			</form>
+			{% if user.is_authenticated %}
+				<button class="add-form-button btn btn-dark col-sm-2 col-6" onclick="return false; window.location.href='/addproblem'">Legg til problem</button>
+			{% endif %}
 			<div class="col-12 card-container mt-5">
-				{% for problem in problems %}
-					<div class="card-margin col-12 col-md-6 col-lg-4">
-						<div class="card problem-card" onclick="checkClick(this, '{{problem.problem_id}}')">
-							<div class="card-title-edit-container d-flex flex-row">
-								<h1 class="card-title col">
-									{{problem.tittel}}
-								</h1>
-								{% if user.is_authenticated %}
-									<div class="edit-container">
-										<img src="{% static 'icons/pencil-square.svg' %}" alt="Endre ikon" class="edit-icon" onclick="window.location.href = '/editproblem/{{problem.problem_id}}'">
+				{% if problems|length != 0 %}
+					{% for problem in problems %}
+						<div class="card-margin col-12 col-md-6 col-lg-4">
+							<div class="card problem-card" onclick="checkClick(this, '{{problem.problem_id}}')">
+								<div class="card-title-edit-container d-flex flex-row">
+									<h1 class="card-title col">
+										{{problem.tittel}}
+									</h1>
+									{% if user.is_authenticated %}
+										<div class="auth-div">
+											<img src="{% static 'icons/pencil-square.svg' %}" alt="Endre ikon" class="edit-icon" onclick="window.location.href = '/editproblem/{{problem.problem_id}}'">
+											<img src="{% static 'icons/trash3.svg' %}" alt="Fjern ikon" class="delete-icon" onclick="window.location.href = '/deleteproblem/{{problem.problem_id}}'">
+										</div>
+									{% endif %}
+								</div>
+								<div class="card-top-container overflow-hidden mb-1">
+									<div class="category-container">
+										<p class="category" style="background-color: #{{problem.kategori.farge}};">
+											{{problem.kategori.navn}}
+										</p>
+										<p class="subcategory" style="background-color: #{{problem.under_kategori.farge}};">
+											{{problem.under_kategori.navn}}
+										</p>
 									</div>
-								{% endif %}
-							</div>
-							<div class="card-top-container overflow-hidden mb-1">
-								<div class="category-container">
-									<p class="category" style="background-color: #{{problem.kategori.farge}};">
-										{{problem.kategori.navn}}
-									</p>
-									<p class="subcategory" style="background-color: #{{problem.kategori.under_kategori.farge}};">
-										{{problem.kategori.under_kategori.navn}}
-									</p>
+								</div>
+								<hr class="mt-0">
+								<p class="card-description">{{problem.beskrivelse}}</p>
+								<div class="card-bottom">
+									<p class="card-date">Postet: {{problem.dato_postet}}</p>
 								</div>
 							</div>
-							<hr class="mt-0">
-							<p class="card-description">{{problem.beskrivelse}}</p>
-							<div class="card-bottom">
-								<p class="card-date">Postet: {{problem.dato_postet}}</p>
-								<!-- <p class="card-click-info">Trykk for å lese mer ></p> -->
-							</div>
 						</div>
-					</div>
-				{% endfor %}
+					{% endfor %}
+				{% else %}
+					<p>Ingen problemer.</p>
+				{% endif %}
 			</div>
 		</div>
 	</div>

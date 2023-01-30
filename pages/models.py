@@ -23,7 +23,6 @@ class UnderKategori(models.Model):
 class Kategori(models.Model):
     navn = models.CharField(max_length=50, primary_key=True)
     farge = models.CharField(max_length=6)
-    under_kategori = models.ForeignKey(UnderKategori, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.navn
@@ -36,6 +35,7 @@ class Problem(models.Model):
     guide = models.TextField(max_length=20000)
     dato_postet = models.DateField(default=datetime.date.today)
     kategori = models.ForeignKey(Kategori, on_delete=models.DO_NOTHING)
+    under_kategori = models.ForeignKey(UnderKategori, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.tittel
@@ -44,4 +44,4 @@ class Problem(models.Model):
 class ProblemForm(ModelForm): # Form laget av problem-modellen som vi kan spesifisere hvilke felt som skal vises.
     class Meta:
         model = Problem
-        fields = ["tittel", "beskrivelse", "guide", "dato_postet", "kategori"]
+        fields = ["tittel", "beskrivelse", "guide", "dato_postet", "kategori", "under_kategori"]

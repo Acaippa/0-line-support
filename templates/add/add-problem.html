@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'add-problem.css' %}">
+<div class="container">
+    <a href="/">< Tilbake</a>
+    <h1 class="main-title">Legg til problem</h1>
+    <hr>
+    <form method="POST" action="/addproblembackend" class="add-problem-form col-12 col-md-7">
+        {{form}}
+        {% csrf_token %}
+        <button class="btn btn-primary mt-4" onclick="this.form.submit()">Legg til Problem</button>
+    </form>
+</div>
+{% endblock %}
