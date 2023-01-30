@@ -3,6 +3,9 @@ import datetime
 from random import randint
 from website.settings import*
 
+from django.forms import ModelForm
+
+
 def get_rand():
     return randint(0, 9)
 
@@ -27,8 +30,8 @@ class Kategori(models.Model):
 
 
 class Problem(models.Model):
-    problem_id = models.IntegerField(default=generate_id, editable=False)
-    tittel = models.CharField(max_length=200, primary_key=True)
+    problem_id = models.IntegerField(default=generate_id, editable=False, primary_key=True)
+    tittel = models.CharField(max_length=200)
     beskrivelse = models.CharField(max_length=1000)
     guide = models.TextField(max_length=20000)
     dato_postet = models.DateField(default=datetime.date.today)
@@ -36,3 +39,9 @@ class Problem(models.Model):
 
     def __str__(self):
         return self.tittel
+    
+
+class ProblemForm(ModelForm): # Form laget av problem-modellen som vi kan spesifisere hvilke felt som skal vises.
+    class Meta:
+        model = Problem
+        fields = ["tittel", "beskrivelse", "guide", "dato_postet", "kategori"]

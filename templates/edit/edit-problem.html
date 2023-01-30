@@ -11,23 +11,10 @@
             Endre problem
         </h1>
         <hr>
-        <form method="pos" action="" class="problem-edit-form col-12 col-md-7">
-            {% for name, type in problem_fields.items %}
-                {% if name != " problem_id" %}
-                    {% if type != "Date" %}
-                        {% if type == "Text" %}
-                            <label for="{{name}}">{{name|title}}:</label>
-                            <textarea name={{name}} placeholder="{{name}}">{{problem|index:forloop.counter0}}</textarea>
-                        {% else %}
-                            <label for="{{name}}">{{name|title}}:</label>
-                            <input name={{name}} type="{{type}}" placeholder="{{name}}" value="{{problem|index:forloop.counter0}}">
-                        {% endif %}
-                    {% else %}
-                        <label for="{{name}}">{{name|title}}:</label>
-                        <input name={{name}} type="{{type}}" placeholder="{{name}}" value="{{problem|index:forloop.counter0|date:'Y-m-d'}}">
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
+        <form method="post" action="/editproblembackend/{{problem_id}}" class="problem-edit-form col-12 col-md-7">
+            {{ form }}
+            {% csrf_token %}
+            <button onclick="this.form.submit()" class="btn btn-primary">Lagre</button>
         </form>
     </div>
 {% else %}
