@@ -1,6 +1,7 @@
 {% extends "main.html" %} {# Gjør slik at det elementer inni content blir lagt til i main.html #}
 
 {% load static %}
+{% load index %}
 
 
 {% block content %}
@@ -10,29 +11,44 @@
 			<h1 class="main-title">	Acaippa FAQ </h1>
 			<p class="slogan">Så hjelpe meg gud om du kontakter helpdesk...</p>
 		</div>
-		<div class="col-12 row mt-5">
+		<div class="col-12 row mt-5 p-0">
 			<form method="POST" action="filter" class="col-12 filter-container">
 				{% csrf_token %}
-				<input type="text" name="filter-text" class="text-filter col-4" placeholder="Hva er problemet?">
+				{% if "filter-text" in filters %}
+					<input type="text" name="filter-text" class="text-filter col-4" placeholder="Hva er problemet?" value="{{filters|index:'filter-text'}}">
+				{% else %}
+					<input type="text" name="filter-text" class="text-filter col-4" placeholder="Hva er problemet?">
+				{% endif %}
 
 				<select class="col-2" name="category-filter" class="">
 					<option value="none" selected disabled hidden>Kategorier:</option>
 					{% for category in categories %}
-						<option value="{{category.navn}}">{{category.navn}}</option>
+						{% if "category-filter" in filters and filters|index:"category-filter" == category.navn %}
+						<option value="{{category.navn}}" selected="selected">{{category.navn}}</option>
+						{% else %}	
+							<option value="{{category.navn}}">{{category.navn}}</option>
+						{% endif %}
 					{% endfor %}
 				</select>
 
 				<select class="col-2" name="subcategory-filter" class="">
 					<option value="none" selected disabled hidden>Under-kategorier:</option>
 					{% for subcategory in subcategories %}
-						<option value="{{subcategory.navn}}">{{subcategory.navn}}</option>
+						{% if "subcategory-filter" in filters and filters|index:"subcategory-filter" == subcategory.navn %}
+						<option value="{{subcategory.navn}}" selected="selected">{{subcategory.navn}}</option>
+						{% else %}	
+							<option value="{{subcategory.navn}}">{{subcategory.navn}}</option>
+						{% endif %}
 					{% endfor %}
 				</select>
 
 				<button onclick="this.form.submit()" class="btn btn-primary">Søk</button>
+				{% if filters|length > 1 %}
+					<a href="/">Reset filtre</a>
+				{% endif %}
 			</form>
 			{% if user.is_authenticated %}
-				<button class="add-form-button btn btn-dark col-sm-2 col-6" onclick="window.location.href='/addproblem'">Legg til problem</button>
+				<button class="add-form-button btn btn-dark col-sm-2 col-6 ms-4" onclick="window.location.href='/addproblem'"><span class="add-form-text">+ Problem</button>
 			{% endif %}
 			<div class="col-12 card-container mt-5">
 				{% if problems|length != 0 %}
