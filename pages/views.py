@@ -63,5 +63,7 @@ def filter_backend(request):
 		all_problems = all_problems.filter(kategori = filters["category-filter"])
 	if "subcategory-filter" in filters:
 		all_problems = all_problems.filter(under_kategori = filters["subcategory-filter"])
+	if "filter-text" in filters:
+		all_problems = all_problems.filter(tittel__icontains = filters["filter-text"])
 
 	return render(request, "index.html", {"problems" : all_problems, "categories" : Kategori.objects.all(), "subcategories" : UnderKategori.objects.all()})

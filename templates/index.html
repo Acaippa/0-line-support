@@ -32,7 +32,7 @@
 				<button onclick="this.form.submit()" class="btn btn-primary">Søk</button>
 			</form>
 			{% if user.is_authenticated %}
-				<button class="add-form-button btn btn-dark col-sm-2 col-6" onclick="return false; window.location.href='/addproblem'">Legg til problem</button>
+				<button class="add-form-button btn btn-dark col-sm-2 col-6" onclick="window.location.href='/addproblem'">Legg til problem</button>
 			{% endif %}
 			<div class="col-12 card-container mt-5">
 				{% if problems|length != 0 %}
@@ -46,7 +46,7 @@
 									{% if user.is_authenticated %}
 										<div class="auth-div">
 											<img src="{% static 'icons/pencil-square.svg' %}" alt="Endre ikon" class="edit-icon" onclick="window.location.href = '/editproblem/{{problem.problem_id}}'">
-											<img src="{% static 'icons/trash3.svg' %}" alt="Fjern ikon" class="delete-icon" onclick="window.location.href = '/deleteproblem/{{problem.problem_id}}'">
+											<img src="{% static 'icons/trash3.svg' %}" alt="Fjern ikon" class="delete-icon" onclick="showOverlay('{{problem.problem_id}}', '{{problem.tittel}}')">
 										</div>
 									{% endif %}
 								</div>
@@ -75,6 +75,17 @@
 		</div>
 	</div>
 </div>
+<div class="delete-confirm-overlay">
+	<div class="delete-confirm">
+		<h1>Slett problem</h1>
+		<p>Er du sikker på at du vil slette <span id="problemName"></span>?</p>
+		<div class="d-flex flex-row justify-content-between mt-5">
+			<button class="col-5 btn btn-danger" onclick="hideOverlay(true)">Ja</button>
+			<button class="col-5 btn btn-success" onclick="hideOverlay(false)">Nei</button>
+		</div>
+	</div>
+</div>
 
 <script src="{% static 'scripts/card-click.js' %}"></script>
+<script src="{% static 'scripts/overlay.js' %}"></script>
 {% endblock %}
