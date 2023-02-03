@@ -1,5 +1,5 @@
 from django.urls import path, include, re_path
-from pages import urls
+from problems import urls
 
 urlpatterns = [
     path('', include(urls)),
