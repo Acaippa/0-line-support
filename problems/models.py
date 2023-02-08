@@ -46,18 +46,24 @@ class ProblemForm(ModelForm): # Form laget av problem-modellen som vi kan spesif
         model = Problem
         fields = ["tittel", "beskrivelse", "guide", "dato_postet", "kategori", "under_kategori"]
 
-class State(models.Model):
+class Status(models.Model):
     navn = models.CharField(max_length=50)
 
     def __str__(self):
         return self.navn
+
+def get_default_status():
+    open_state = Status.objects.filter(navn="Åpen")
+    if open_state.exists():
+        return open_state[0]
     
+    return ""
     
 class Ticket(models.Model):
     email = models.EmailField()
     emne = models.CharField(max_length=200)
     melding = models.TextField(max_length=1500)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, null=True, blank=True)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True, blank=True, default=get_default_status) # Gjør standardstaten til "Åpen"
 
     def __str__(self):
         return f"{self.emne}, {self.email}"
