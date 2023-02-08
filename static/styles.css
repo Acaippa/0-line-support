@@ -70,7 +70,7 @@ hr {
 	flex-direction: column;
 }
 
-.ticket-form > * {
+.ticket-form > input {
 	margin-bottom: 20px;
 }
 

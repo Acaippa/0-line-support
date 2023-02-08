@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Problem, ProblemForm, Kategori, UnderKategori
+from .models import Problem, ProblemForm, Kategori, UnderKategori, Ticket, TicketForm
 
 
 def get_problem_from_id(id, index = 0): # Få problemet med den spesifike problemid'en
@@ -12,7 +12,7 @@ def card_detail(request, problemId):
 	return render(request, "card-detail.html", {"problem" : get_problem_from_id(problemId)})
 
 def ticket_page(request, problemId):
-	return render(request, "ticket.html", {"problem_id" : get_problem_from_id(problemId).problem_id})
+	return render(request, "ticket.html", {"problem_id" : get_problem_from_id(problemId).problem_id, "ticket_form" : TicketForm()})
 
 
 # ? Edit problem
@@ -64,7 +64,6 @@ def filter_backend(request):
 
 	filters = filters_temp
 
-	print(filters)
 	all_problems = Problem.objects.all()
 	if "category-filter" in filters:
 		all_problems = all_problems.filter(kategori__navn = filters["category-filter"])
@@ -78,3 +77,11 @@ def filter_backend(request):
 	context = {"problems" : all_problems, "categories" : Kategori.objects.all(), "subcategories" : UnderKategori.objects.all(), "filters" : filters}
 
 	return render(request, "index.html", context)
+
+# ? Ticket
+
+def ticket_backend(request):
+	form = TicketForm(request.POST)
+	if form.is_valid():
+		form.save()
+	return redirect("/")

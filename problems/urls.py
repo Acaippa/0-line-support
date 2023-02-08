@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from .views import main_page, card_detail, ticket_page, edit_problem_page, edit_problem_backend, add_problem, add_problem_backend, delete_problem, filter_backend
+from .views import main_page, card_detail, ticket_page, edit_problem_page, edit_problem_backend, add_problem, add_problem_backend, delete_problem, filter_backend, ticket_backend
 
 
 urlpatterns = [
@@ -16,5 +16,7 @@ urlpatterns = [
 
     path('deleteproblem/<int:problemId>', delete_problem),
 
-    path('filter', filter_backend)
+    path('filter', filter_backend),
+
+    path('ticketbackend', ticket_backend),
 ]

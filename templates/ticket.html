@@ -7,11 +7,10 @@
 		<h1 class="main-title">Kontakt helpdesk</h1>
 		<p class="slogan">Hjalp ingen av brukerveiledningene? Kontakt helpdesken her så fikser vi problemet.</p>
 		<hr>
-		<form class="ticket-form mt-5">
-			<input type="email" name="ticket-email" class="email-ticket col-12 col-sm-6" placeholder="Email:">
-			<input type="text" name="ticket-topic" class="topic-ticket col-12 col-sm-6" placeholder="Emne:">
-			<textarea class="ticket-content col-12 col-sm-6" rows=5 name="ticket-content" placeholder="Forklar problemet i detalj:"></textarea>
-			<button class="ticket-button col-6 col-sm-2">Send Inn</button>
+		<form class="ticket-form mt-5" method="POST" action="/ticketbackend">
+			{% csrf_token %}
+			{{ticket_form}}
+			<button class="btn btn-success col-6 mt-4">Send inn</button>
 		</form>
 	</div>
 </div>
