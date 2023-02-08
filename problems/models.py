@@ -54,6 +54,7 @@ class Status(models.Model):
 
 def get_default_status():
     open_state = Status.objects.filter(navn="Åpen")
+    
     if open_state.exists():
         return open_state[0]
     
