@@ -37,6 +37,8 @@
 	transition: all .2s;
 	overflow: hidden !important;
 	overflow-wrap: anywhere !important;
+	height: 16rem;
+	position: relative;
 }
 
 .card:hover{
@@ -96,6 +98,7 @@ hr {
 	/* color: white; */
 	border-color: white;
 	overflow: hidden;
+	font-weight: 500;
 }
 
 
@@ -109,8 +112,8 @@ hr {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	position: relative;
-	bottom: -22px;
+	position: absolute;
+	bottom: 0;
 	
 }
 
@@ -118,6 +121,10 @@ hr {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.card-date {
+	margin-bottom: 5px;
 }
 
 .add-form-div {
@@ -161,6 +168,13 @@ hr {
 
 #problemName{
 	font-weight: bold;
+}
+
+.double-line-wrap {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+	overflow: hidden;
 }
 
 @media (max-width: 576px){

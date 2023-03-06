@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'problems',
     'django_markup',
+    'colorfield'
 
 ]
 
@@ -121,6 +122,9 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT =  'static-final/'
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container pt-3"> <!-- TODO make container have different background from body -->
-	<a href="/">< Tilbake</a>
+	<a href="javascript: history.go(-1);">< Tilbake</a>
 	<h1 class="main-title">{{problem.tittel}}</h1>
 	<p class="card-detail-desc">{{problem.beskrivelse}}<p class="card-detail-date">Postet: 01.01.2023</p></p>
 	<div class="card-detail-top">
@@ -19,7 +19,7 @@
 	<hr class="mt-1">
 	<div class="card-guide-container d-flex flex-column">
 		{{problem.guide|apply_markup:"markdown"}}
-		<a class="text-center" href="/ticket/{{problem.problem_id}}">Har du fortsatt problemer? Kontakt Helpdesk her</a>
+		<a class="text-center" href="/ticket">Har du fortsatt problemer? Kontakt Helpdesk her</a>
 	</div>
 </div>
 {% endblock %}

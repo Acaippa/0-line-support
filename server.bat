@@ -1,3 +1,2 @@
-pip install django
-pip install django-livereload
+pip install -r requirements.txt
 python manage.py runserver

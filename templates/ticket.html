@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container"> <!-- TODO change color -->
 	<div class="ticket-body mt-5 mb-5">
-		<a href="/problem/{{problem_id}}">< Tilbake</a>
+		<a href="javascript: history.go(-1);">< Tilbake</a>
 		<h1 class="main-title">Kontakt helpdesk</h1>
 		<p class="slogan">Hjalp ingen av brukerveiledningene? Kontakt helpdesken her så fikser vi problemet.</p>
 		<hr>
-		<form class="ticket-form mt-5" method="POST" action="/ticketbackend">
+		<form class="ticket-form mt-5 col-12 col-md-7" method="POST" action="/ticket">
 			{% csrf_token %}
 			{{ticket_form}}
 			<button class="btn btn-success col-6 mt-4">Send inn</button>

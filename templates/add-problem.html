@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'add-problem.css' %}">
+<link rel="stylesheet" href="{% static 'styles/add-problem.css' %}">
 <div class="container">
-    <a href="/">< Tilbake</a>
+    <a href="javascript: history.go(-1);">< Tilbake</a>
     <h1 class="main-title">Legg til problem</h1>
     <hr>
-    <form method="POST" action="/addproblembackend" class="add-problem-form col-12 col-md-7">
+    <form method="POST" action="/addproblem" class="add-problem-form col-12 col-md-7">
         {{form}}
         {% csrf_token %}
         <button class="btn btn-primary mt-4" onclick="this.form.submit()">Legg til Problem</button>

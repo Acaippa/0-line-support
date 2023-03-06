@@ -5,14 +5,14 @@
 {% block content %}
 <!-- Om brukeren ikke er logget inn, så sendes de tilbake til hovedsiden -->
 {% if user.is_authenticated %}
-    <link rel="stylesheet" href="{% static 'edit-problem.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/edit-problem.css' %}">
     <div class="container">
-        <a href="/">< Tilbake</a>
+        <a href="javascript: history.go(-1);">< Tilbake</a>
         <h1 class="main-title">
             Endre problem
         </h1>
         <hr>
-        <form method="post" action="/editproblembackend/{{problem_id}}" class="problem-edit-form col-12 col-md-7">
+        <form method="POST" action="/editproblem/{{problem_id}}" class="problem-edit-form col-12 col-md-7">
             {{ form }}
             {% csrf_token %}
             <button onclick="this.form.submit()" class="btn btn-primary">Lagre</button>

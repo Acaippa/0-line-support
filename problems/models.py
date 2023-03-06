@@ -1,20 +1,20 @@
 from django.db import models
 import datetime
 from random import randint
-from website.settings import*
+from colorfield.fields import ColorField
+
 
 from django.forms import ModelForm
 
 
-def get_rand():
-    return randint(0, 9)
-
 def generate_id():
-    return f"{get_rand()}{get_rand()}{get_rand()}{get_rand()}{get_rand()}{get_rand()}"
+    return randint(0, 100000)
+
 
 class UnderKategori(models.Model):
     navn = models.CharField(max_length=70)
-    farge = models.CharField(max_length=6)
+    farge = ColorField(default="#ffffff")
+    tekst_farge = ColorField(default="#ffffff")
 
     def __str__(self):
         return self.navn
@@ -22,7 +22,8 @@ class UnderKategori(models.Model):
 
 class Kategori(models.Model):
     navn = models.CharField(max_length=50, primary_key=True)
-    farge = models.CharField(max_length=6)
+    farge = ColorField(default="#ffffff")
+    tekst_farge = ColorField(default="#ffffff")
 
     def __str__(self):
         return self.navn
@@ -39,12 +40,6 @@ class Problem(models.Model):
 
     def __str__(self):
         return self.tittel
-    
-
-class ProblemForm(ModelForm): # Form laget av problem-modellen som vi kan spesifisere hvilke felt som skal vises.
-    class Meta:
-        model = Problem
-        fields = ["tittel", "beskrivelse", "guide", "dato_postet", "kategori", "under_kategori"]
 
 class Status(models.Model):
     navn = models.CharField(max_length=50)
@@ -69,9 +64,5 @@ class Ticket(models.Model):
     def __str__(self):
         return f"{self.emne}, {self.email}"
 
-class TicketForm(ModelForm):
-    class Meta:
-        model = Ticket
-        fields = ["email", "emne", "melding"]
 
 
