@@ -1,6 +1,6 @@
 django-colorfield
 django
 django-livereload
-django-markdown
+django-markup
 bleach
 django
